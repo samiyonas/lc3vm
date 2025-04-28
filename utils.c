@@ -261,3 +261,10 @@ uint16_t check_key()
     timeout.tv_usec = 0;
     return select(1, &readfds, NULL, NULL, &timeout) != 0;
 }
+
+void handle_interrupt(int signal)
+{
+    restore_input_buffering();
+    printf("\n");
+    exit(-2);
+}

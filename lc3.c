@@ -22,6 +22,9 @@ int main(int argc, const char **argv)
             exit(1);
         }
     }
+
+    signal(SIGINT, handle_interrupt);
+    disable_input_buffering();
     /* since exactly one condition flag should be set at any given time, set the Z flag */
     reg[R_COND] = FL_ZRO;
     /* set the PC to starting position */
@@ -38,31 +41,31 @@ int main(int argc, const char **argv)
         switch (op)
         {
             case OP_ADD:
-                break;
+                add(instr);
             case OP_AND:
-                break;
+                And(instr);
             case OP_NOT:
-                break;
+                Not(instr);
             case OP_BR:
-                break;
+                branch(instr);
             case OP_JMP:
-                break;
+                jump(instr);
             case OP_JSR:
-                break;
+                jump_register(instr);
             case OP_LD:
-                break;
+                load(instr);
             case OP_LDI:
-                break;
+                ldi(instr);
             case OP_LDR:
-                break;
+                load_register(instr);
             case OP_LEA:
-                break;
+                load_effective_address(instr);
             case OP_ST:
-                break;
+                store(instr);
             case OP_STI:
-                break;
+                store_indirect(instr);
             case OP_STR:
-                break;
+                store_register(instr);
             case OP_TRAP:
                 /* we would have more cases here */
                 reg[R_R7] = reg[R_PC];

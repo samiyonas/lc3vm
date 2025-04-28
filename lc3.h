@@ -39,6 +39,7 @@ uint16_t mem_read(uint16_t address);
 void disable_input_buffering();
 void restore_input_buffering();
 uint16_t check_key();
+void handle_interrupt(int signal);
 
 extern uint16_t memory[MEMORY_MAX]; /* 65,536 locations */
 
